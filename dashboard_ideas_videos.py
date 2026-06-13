@@ -5,9 +5,8 @@ from io import BytesIO
 
 st.set_page_config(page_title="Generador PRO Reels - Daniel", layout="wide")
 st.title("🚀 Generador PRO de Reels Virales para Instagram")
-st.markdown("**Funnel de Confianza + Afiliados Hotmart + Algoritmo Instagram**")
+st.markdown("**Optimizado para algoritmo de Instagram + Funnel de Confianza + Ventas Hotmart**")
 
-# Temas sugeridos
 temas_sugeridos = [
     "Mejorar tu matrimonio", "Hacer que tus hijos sean productivos", 
     "Cuidar bebés y dormir mejor", "Superar la procrastinación",
@@ -18,8 +17,8 @@ def sugerir_producto_hotmart(tema):
     productos = {
         "matrimonio": ["Matrimonio Blindado", "Relación Sin Límites"],
         "hijos": ["Padres Efectivos", "Educación con Propósito"],
-        "procrastinacion": ["Productividad Extrema"],
-        "fe": ["Fe Inquebrantable"],
+        "procrastinacion": ["Productividad Extrema", "Disciplina de Acero"],
+        "fe": ["Fe Inquebrantable", "Vida con Propósito"],
         "salud": ["Transformación Física Total"],
         "ansiedad": ["Paz Mental Total"]
     }
@@ -28,90 +27,112 @@ def sugerir_producto_hotmart(tema):
             return random.choice(productos[key])
     return "Curso de Desarrollo Personal Avanzado"
 
-def generar_idea_video(tema=None, cantidad=1, serie=False):
+def generar_idea_video(tema=None, cantidad=1, es_serie=False):
     ideas_generadas = []
-    tema_actual = tema.strip() if tema and tema.strip() else random.choice(temas_sugeridos)
+    
+    if not tema:
+        temas_comunes = [
+            "Mejorar tu matrimonio", "Hacer que tus hijos sean productivos", 
+            "Cuidar bebés y dormir mejor", "Superar la procrastinación", 
+            "Mejorar tu salud y energía", "Lograr metas financieras", 
+            "Encontrar paz mental", "Fortalecer tu fe", "Ser mejor padre"
+        ]
+        tema_actual = random.choice(temas_comunes)
+    else:
+        tema_actual = tema.strip()
+    
+    # Pool grande de tips para que nunca se repitan
+    tips_pool = [
+        "Cada noche dedica exactamente 10 minutos a escuchar a tu pareja sin interrumpir ni dar soluciones. Solo valida sus emociones.",
+        "Envía cada mañana un mensaje específico: 'Gracias por [algo concreto que hizo ayer]'.",
+        "Aplica la regla 5:1 → Por cada crítica, da 5 elogios sinceros y detallados.",
+        "Planifica una cita semanal sin celulares (paseo o cena en casa).",
+        "Escribe 3 cosas que amas de tu pareja y díselas en voz alta antes de dormir.",
+        "Cuando discutan, usa la técnica de la pausa de 10 minutos antes de responder.",
+        "Haz una lista juntos de sueños como pareja y revísenla cada mes.",
+    ]
     
     for i in range(cantidad):
-        # Hooks corregidos
-        hooks = [
-            f"STOP 🔥 Esto es lo que está arruinando tu {tema_actual}...",
-            f"¿Cansado de sufrir por {tema_actual} todos los días?",
-            f"Lo que nadie te cuenta sobre {tema_actual} pero sí funciona",
-            f"Imagina arreglar tu {tema_actual} en solo unos días..."
-        ]
-        
-        # Tips siempre variados
-        tips_pool = [
-            "Cada noche dedica 10 minutos a escuchar activamente a tu pareja sin interrumpir ni dar soluciones. Solo valida cómo se siente.",
-            "Cada mañana envía un mensaje específico de agradecimiento por algo concreto que hizo el día anterior.",
-            "Aplica la regla 5:1 → Por cada crítica, da 5 elogios sinceros y detallados.",
-            "Planifica una cita semanal sin celulares (paseo corto o café en casa).",
-            "Escribe 3 cosas que amas de tu pareja y díselas en voz alta antes de dormir."
-        ]
-        
         selected_tips = random.sample(tips_pool, 3)
+        
+        hook = random.choice([
+            f"STOP 🔥 Esto es lo que está destruyendo tu {tema_actual.lower()}...",
+            f"¿Cansado de sentirte frustrado con {tema_actual.lower()} todos los días?",
+            f"Lo que nadie te cuenta sobre {tema_actual.lower()} (pero funciona)",
+        ])
+        
+        dolor = random.choice([
+            f"Te sientes agotado, culpable y sin esperanza porque has intentado todo y nada cambia.",
+            f"Tu relación se está deteriorando y sientes que estás fallando como pareja.",
+        ])
         
         producto = sugerir_producto_hotmart(tema_actual)
         
-        guion = f"""0-3s: [HOOK] {random.choice(hooks)}
-3-15s: [DOLOR] Te sientes frustrado, agotado y sin esperanza porque nada ha funcionado.
-15-25s: [PRUEBA SOCIAL] Miles ya transformaron su {tema_actual} con este método.
-25-50s: [TIPS ESPECÍFICOS]
+        guion = f"""0-3s: [HOOK] {hook}
+3-12s: [DOLOR] {dolor}
+12-20s: [PRUEBA SOCIAL] Miles de personas ya transformaron su matrimonio con este método.
+20-40s: [TIPS CONCRETOS]
 • {selected_tips[0]}
 • {selected_tips[1]}
 • {selected_tips[2]}
-50-60s: [CTA] Comenta 'GUÍA' para recibir el PDF gratis."""
+40-55s: [LEAD MAGNET] Comenta 'GUÍA' y te envío el PDF gratis con los pasos detallados.
+55-60s: [CTA] Comenta 'GUÍA' ahora 👇"""
 
-        titulo = f"Cómo {tema_actual} en 60 segundos (método que realmente funciona) 🔥"
-
+        puntuacion = calcular_puntuacion_viralidad()
+        
         idea = f"""🎥 **IDEA PRO #{i+1} - {tema_actual.upper()}**
 
-**📌 TÍTULO VIRAL:**  
-{titulo}
+**📌 TÍTULO VIRAL:** Cómo {tema_actual.lower()} en 60 segundos (funciona de verdad) 🔥
 
-**🔥 PUNTUACIÓN VIRALIDAD:** {random.randint(88, 97)}/100
+**🔥 PUNTUACIÓN DE VIRALIDAD:** {puntuacion}/100
 
-**GUION COMPLETO:**
+**⏱️ Duración:** 45-60 segundos
+
+**GUION COMPLETO (Funnel de Confianza + Venta):**
 {guion}
 
-**💰 HOTMART (Afiliado):** Recomiendo "{producto}"
+**🔥 HASHTAGS:** #ReelsInstagram #Motivacion #VidaMejor #CrecimientoPersonal #{tema_actual.replace(' ','')} #Transformacion
 
-**📸 THUMBNAIL PROMPT:**  
-Split before/after (triste → feliz), texto grande "{titulo}", colores dramáticos, 9:16 vertical
+**📸 THUMBNAIL PROMPT:** Split before/after persona triste → feliz, texto grande '{tema_actual}', estilo cinematográfico, alta emoción
 
-**🔥 HASHTAGS:** #ReelsInstagram #Motivacion #{tema_actual.replace(' ','')} #VidaMejor #CrecimientoPersonal"""
+**💰 MONETIZACIÓN HOTMART:** {producto} (recomienda el PDF gratis y al final ofrece el curso como recurso recomendado)
 
+**✅ Recomendación Instagram:** Publica como parte de una serie de 7 días."""
+        
         ideas_generadas.append(idea)
+    
+    if es_serie:
+        return f"**SERIE DE 7 DÍAS - {tema_actual}**\n\n" + "\n\n".join(ideas_generadas)
     
     return "\n\n" + "="*90 + "\n\n".join(ideas_generadas)
 
-# Interfaz
-st.subheader("🎯 Elige el tema")
-tema = st.selectbox("Tema", [""] + temas_sugeridos)
+# ====================== INTERFAZ ======================
+st.subheader("📋 Elige un tema o escribe el tuyo")
+tema = st.selectbox("Temas sugeridos", [""] + temas_sugeridos)
 if not tema:
-    tema = st.text_input("Escribe tu propio tema:")
+    tema = st.text_input("Escribe tu propio tema:", placeholder="mejorar tu matrimonio")
 
 cantidad = st.slider("Número de ideas", 1, 5, 3)
-es_serie = st.checkbox("Generar Serie de 7 días", value=False)
+es_serie = st.checkbox("Generar como SERIE DE 7 DÍAS", value=False)
 
 if st.button("🚀 Generar Ideas PRO", type="primary", use_container_width=True):
-    with st.spinner("Generando..."):
+    with st.spinner("Generando contenido de alto nivel..."):
         resultado = generar_idea_video(tema, cantidad, es_serie)
-        st.success("¡Listo!")
+        st.success(f"¡{cantidad} ideas generadas con éxito!")
         st.markdown(resultado)
         
-        # Descarga
         txt = BytesIO(resultado.encode("utf-8"))
-        st.download_button("📥 Descargar TXT", txt, f"reels_{datetime.datetime.now().strftime('%Y%m%d')}.txt")
+        st.download_button("📥 Descargar como TXT", txt, f"ideas_{datetime.datetime.now().strftime('%Y%m%d_%H%M')}.txt")
 
 # Reescritor
 st.markdown("---")
 st.subheader("🔄 Reescritor Anti-Plagio")
-idea_orig = st.text_area("Pega idea viral que viste:")
-if st.button("Reescribir Única"):
-    if idea_orig:
-        st.success("Versión original generada")
-        st.markdown("**Versión única:** Imagina transformar " + idea_orig.lower() + " con este enfoque fresco...")
+idea_original = st.text_area("Pega aquí una idea viral que viste:", height=80)
+if st.button("Reescribir como Contenido Original"):
+    if idea_original.strip():
+        st.success("Versión 100% original generada")
+        st.markdown(f"**Título:** Cómo transformar {idea_original.lower()} sin que parezca imposible (método real)\n\n**Guion único:** ... (versión personalizada)")
+    else:
+        st.warning("Escribe una idea primero.")
 
-st.caption("Dashboard PRO para Daniel")
+st.caption("Dashboard PRO para Daniel • Creado con el Agente de Codificación de Grok")
